@@ -35,3 +35,7 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
+modules/s3/lambda_handler.zip
+.gitignore
+modules/s3/.terraform.lock.hcl
+.terraform.lock.hcl
