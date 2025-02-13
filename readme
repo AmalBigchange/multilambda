@@ -1,0 +1,7 @@
+To run the terraform files us:
+
+"terraform init" - initiate the directory
+"terraform validate" - "check the code validates and is syntax correct"
+"terraform plan" - "checks if there are any changes to be applied to the configuration"
+"terraform import 'module.lambda_code.aws_lambda_function.lambda' My_lambda" - this import the exisiting lambda rather than creating a new one every time
+"terraform apply" - runs the terraform config
