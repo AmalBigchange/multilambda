@@ -1,4 +1,4 @@
-To run the terraform files us:
+To run the terraform files use:
 
 "terraform init" - initiate the directory
 "terraform validate" - "check the code validates and is syntax correct"
