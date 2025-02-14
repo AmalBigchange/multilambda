@@ -9,23 +9,13 @@ resource "aws_iam_role_policy_attachment" "lambda_policy" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonS3ObjectLambdaExecutionRolePolicy"
 }
 
-#finds and exisiting lambda function with a specificed name
-data "aws_lambda_function" "existing_lambda" {
-  function_name = var.function_name
-}
 
 #builds the lambda function
 resource "aws_lambda_function" "lambda_handler" {
     function_name = var.function_name
     s3_bucket = var.s3_bucket
     s3_key = var.s3_key
-    handler = data.aws_lambda_function.existing_lambda.handler
-    runtime = data.aws_lambda_function.existing_lambda.runtime
-    role = data.aws_iam_role.existing_lambda_role.arn
-
-    lifecycle {
-      ignore_changes = [ 
-        function_name,
-       ]
-    }
+    handler = var.handler
+    runtime = var.runtime
+    role = var.role
 }

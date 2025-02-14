@@ -21,5 +21,5 @@ variable "runtime" {
 variable "role" {
   description = "IAM Role"
   type = string
-  default = "arn:aws:iam::aws:policy/service-role/AmazonS3ObjectLambdaExecutionRolePolicy"
+  default = "arn:aws:iam::471989956476:role/lambda_role"
 }

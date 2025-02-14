@@ -10,3 +10,8 @@ variable "source_file" {
   description = "Path to the source file to be uploaded."
   type        = string
 }
+
+variable "output_path" {
+  description = "Path to the source file to be uploaded."
+  type        = string
+}

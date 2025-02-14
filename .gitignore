@@ -40,3 +40,13 @@ modules/s3/lambda_handler.zip
 modules/s3/.terraform.lock.hcl
 .terraform.lock.hcl
 lambda_handler.zip
+lambda_2.zip
+lambda_20250214010808.zip
+.gitignore
+lambda_20250214010849.zip
+.gitignore
+lambda_20250214011014.zip
+lambda_20250214011057.zip
+.gitignore
+lambda_20250214011103.zip
+lambda_20250214011143.zip
