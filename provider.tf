@@ -11,5 +11,4 @@ terraform {
 
 provider "aws" {
   region  = "eu-west-2"  # Default region; this can be overridden in variable definitions
-  profile = "default"    # AWS CLI profile to use
 }
