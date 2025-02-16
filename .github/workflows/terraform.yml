@@ -36,7 +36,7 @@ jobs:
 
     - name: Terraform Init
       run: terraform init
-      working-directory: /home/runner/work/lambda_terraform/lambda_terraform/tf
+      working-directory: /home/runner/work/MULTILAMBDA
 
     - name: Terraform Format
       run: terraform fmt -recursive
