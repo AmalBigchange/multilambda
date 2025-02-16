@@ -40,21 +40,17 @@ jobs:
 
     - name: Terraform Format
       run: terraform fmt -recursive
-      working-directory: /home/runner/work/MULTILAMBDA
-
-    #- name: Terraform Import
-    #  run: terraform import aws_lambda_function.lambda_handler My_lambda
-    #  working-directory: /home/runner/work/lambda_terraform/lambda_terraform/tf
+      working-directory: /home/runner/work/multilambda
 
     - name: Terraform Plan
       run: | 
         export TF_LOG=DEBUG 
         terraform plan -input=false
-      working-directory: /home/runner/work/lambda_terraform/lambda_terraform/tf
+      working-directory: /home/runner/work/multilambda
 
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: | 
         export TF_LOG=DEBUG 
         terraform apply -auto-approve
-      working-directory: /home/runner/work/lambda_terraform/lambda_terraform/tf
+      working-directory: /home/runner/work/multilambda
