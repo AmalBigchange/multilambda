@@ -18,7 +18,7 @@ module "s3_code_upload2" {
 #module to call the lambda main.tf to create a lambda object
 module "lambda_code" {
     source = "./modules/lambda"
-    function_name = "mylambda2"
+    function_name = "mylambda4"
     s3_bucket = "s3amal"
     s3_key = module.s3_code_upload.output_path
     runtime = "python3.9"
