@@ -1,33 +1,60 @@
-name: "Terraform"
+name: 'Terraform'
 
 on:
-    push:
-        branches: ["main"]
-    pull_request:
+  push:
+    branches: [ "main" ]
+  pull_request:
 
 permissions:
-    contents: read
+  contents: read
 
 jobs:
-    terraform:
-        name: "Terraform"
-        runs-on: ubuntu-latest
-        environment: production
-        defaults:
-            run:
-                shell: bash
-        steps:
-            - name: Checkout
-            uses: actions/checkout@v4
-            
-        - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
-        with:
-            cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-                
-        - name: Set up AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            aws-region: us-west-2 # replace with your AWS region
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    environment: production
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+          
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+    - name: Set up AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-west-2 # replace with your AWS region
+
+
+    - name: Terraform Init
+      run: terraform init
+      working-directory: /home/runner/work/lambda_terraform/lambda_terraform/tf
+
+    - name: Terraform Format
+      run: terraform fmt -recursive
+      working-directory: /home/runner/work/lambda_terraform/lambda_terraform/tf
+
+    #- name: Terraform Import
+    #  run: terraform import aws_lambda_function.lambda_handler My_lambda
+    #  working-directory: /home/runner/work/lambda_terraform/lambda_terraform/tf
+
+    - name: Terraform Plan
+      run: | 
+        export TF_LOG=DEBUG 
+        terraform plan -input=false
+      working-directory: /home/runner/work/lambda_terraform/lambda_terraform/tf
+
+    - name: Terraform Apply
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: | 
+        export TF_LOG=DEBUG 
+        terraform apply -auto-approve
+      working-directory: /home/runner/work/lambda_terraform/lambda_terraform/tf
