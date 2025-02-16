@@ -36,7 +36,8 @@ jobs:
 
     - name: Terraform Init
       run: terraform init
-      working-directory: multilambda
+      working-directory: /home/runner/work/multilambda/multilambda
+
 
     - name: Terraform Format
       run: terraform fmt -recursive
