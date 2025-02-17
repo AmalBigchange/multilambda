@@ -3,7 +3,7 @@ module "s3_code_upload" {
     source = "./modules/s3" # this is the path to the s3 module folder
     #bucket_name = "bucket.name" /use this line to give it a custom bucket name if not it will use the default 
     source_file = "./codefile.py"
-    output_path = "lambda_${formatdate("YYYYMMDDHHmmss", timestamp())}.zip"
+    output_path = "lambda${formatdate("YYYYMMDDHHmmss", timestamp())}.zip"
   
 }
 
@@ -11,7 +11,7 @@ module "s3_code_upload2" {
     source = "./modules/s3" # this is the path to the s3 module folder
     #bucket_name = "bucket.name" /use this line to give it a custom bucket name if not it will use the default 
     source_file = "./codefile3.py"
-    output_path = "lambda_2${formatdate("YYYYMMDDHHmmss", timestamp())}.zip"
+    output_path = "code${formatdate("YYYYMMDDHHmmss", timestamp())}.zip"
   
 }
 
