@@ -9,6 +9,16 @@ resource "aws_iam_role_policy_attachment" "lambda_policy" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonS3ObjectLambdaExecutionRolePolicy"
 }
 
+resource "null_resource" "lambda_destroy" {
+  triggers = {
+    function_name = var.function_name
+  }
+
+  provisioner "local-exec" {
+    command = "aws lambda delete-function --function-name ${var.function_name} || true"
+  }
+}
+
 
 #builds the lambda function
 resource "aws_lambda_function" "lambda_handler" {
@@ -18,8 +28,5 @@ resource "aws_lambda_function" "lambda_handler" {
     handler = var.handler
     runtime = var.runtime
     role = var.role
-
-    lifecycle {
-      create_before_destroy = true
-    }
+    depends_on = [ null_resource.lambda_destroy ]
 }
