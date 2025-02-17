@@ -1,4 +1,4 @@
 output "output_path" {
-  value = ".zip"
+  value = var.output_path
   description = "The output path of the zipped source code file."
 }
