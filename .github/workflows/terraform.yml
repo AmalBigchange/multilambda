@@ -12,10 +12,11 @@ jobs:
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
-    environment: production
+    #environment: production
     defaults:
       run:
         shell: bash
+        working-directory: /home/runner/work/multilambda/multilambda
 
     steps:
     - name: Checkout
@@ -36,22 +37,21 @@ jobs:
 
     - name: Terraform Init
       run: terraform init
-      working-directory: /home/runner/work/multilambda/multilambda
+      
 
 
     - name: Terraform Format
       run: terraform fmt -recursive
-      working-directory: /home/runner/work/multilambda/multilambda
+      
 
     - name: Terraform Plan
       run: | 
         export TF_LOG=DEBUG 
         terraform plan -input=false
-      working-directory: /home/runner/work/multilambda/multilambda
+      
 
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: | 
         export TF_LOG=DEBUG 
         terraform apply -auto-approve
-      working-directory: /home/runner/work/multilambda/multilambda
