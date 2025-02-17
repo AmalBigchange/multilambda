@@ -18,4 +18,8 @@ resource "aws_lambda_function" "lambda_handler" {
     handler = var.handler
     runtime = var.runtime
     role = var.role
+
+    lifecycle {
+      create_before_destroy = true
+    }
 }
